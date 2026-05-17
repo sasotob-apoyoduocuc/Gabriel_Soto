@@ -2,14 +2,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alerta de Tornado</title>
+  <title>ALERTA DE TORNADO</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: Arial, Helvetica, sans-serif;
-    }body {
+    }html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+body {
   background: #000;
   overflow: hidden;
   color: white;
@@ -22,7 +29,7 @@
 .background-flash {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle, #5b0000 0%, #1a0000 50%, #000 100%);
+  background: radial-gradient(circle, #ff3b00 0%, #7a0000 45%, #000 100%);
   animation: pulseBg 1.2s infinite;
   z-index: 0;
 }
@@ -34,6 +41,8 @@
 }
 
 .alert-box {
+  border-radius: 20px;
+  overflow: hidden;
   position: relative;
   z-index: 2;
   width: 90%;
@@ -41,7 +50,12 @@
   border: 8px solid #ff2d2d;
   background: rgba(0,0,0,0.88);
   box-shadow: 0 0 30px rgba(255,0,0,0.9);
-  animation: shake 0.08s infinite alternate;
+  animation: shake 0.08s infinite alternate, glow 1.2s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 20px rgba(255,0,0,0.7); }
+  to { box-shadow: 0 0 45px rgba(255,120,0,1); }
 }
 
 @keyframes shake {
@@ -75,6 +89,7 @@
 }
 
 .warning {
+  font-family: Impact, Haettenschweiler, 'Arial Black', sans-serif;
   font-size: 4rem;
   font-weight: 900;
   color: #ff3b3b;
@@ -215,27 +230,34 @@
 </head>
 <body>  <div class="background-flash"></div>  <div class="alert-box">
     <div class="top-bar">
-      ⚠ EMERGENCY ALERT SYSTEM ⚠
+      ⚠ SISTEMA DE ALERTA ⚠
     </div><div class="content">
-  <div class="warning">TORNADO WARNING</div>
+  <div class="warning">🌪 ALERTA DE TORNADO 🌪</div>
 
   <div class="details">
-    SEEK SHELTER IMMEDIATELY<br>
-    A dangerous tornado has been detected in your area.<br><br>
-    Move to a basement or interior room away from windows.<br>
-    Stay tuned for further emergency updates.
+    ¡ATENCIÓN!<br>
+    Se detectó un tornado gigante acercándose a la ciudad.<br><br>
+    🌪 Busca refugio y mantente lejos de las ventanas.<br>
+    📢 Sigue las instrucciones de emergencia y mantén la calma.
   </div>
 </div>
 
 <div class="ticker">
   <div class="ticker-text">
-    EMERGENCY WARNING • TAKE COVER NOW • EXTREME WEATHER EVENT DETECTED • THIS IS NOT A TEST •
+    🌪 ALERTA DE TORNADO • BUSCA REFUGIO • EVENTO CLIMÁTICO EXTREMO • MANTENTE A SALVO • 🌪
   </div>
 </div>
 
   </div>  <div class="static"></div>  <button class="play-button" onclick="startAlert()">
-    ▶ ACTIVAR SONIDO
+    🔊 ACTIVAR ALERTA
   </button>  <script>
+    // Pantalla completa automática en móviles
+    document.addEventListener('click', () => {
+      const el = document.documentElement;
+      if (el.requestFullscreen) {
+        el.requestFullscreen().catch(() => {});
+      }
+    }, { once: true });
     let started = false;
 
     function startAlert() {
